@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>जार्विस AI - 3D वॉइस असिस्टेंट</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <!-- 3D Background Particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Floating 3D Elements -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+    </div>
+
+    <!-- Main Container with 3D Effect -->
+    <div class="container-3d">
+        <!-- Header with Glow Effect -->
+        <header class="header-glow">
+            <div class="logo-3d">
+                <div class="logo-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="logo-text">
+                    <h1 class="neon-title">जार्विस AI</h1>
+                    <p class="subtitle-3d">हिंदी वॉइस असिस्टेंट <span class="version">v6.0</span></p>
+                </div>
+            </div>
+            
+            <div class="spiritual-greeting">
+                <div class="radhe-radhe">
+                    <i class="fas fa-om"></i>
+                    <span>राधे राधे</span>
+                    <i class="fas fa-om"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Left Panel - Status & Controls -->
+            <div class="left-panel">
+                <!-- Status Cards -->
+                <div class="status-section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> सिस्टम स्टेटस</h2>
+                    
+                    <div class="status-cards">
+                        <div class="status-card card-3d" id="mic-status-card">
+                            <div class="card-icon">
+                                <i class="fas fa-microphone"></i>
+                                <div class="pulse-dot"></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>वॉइस</h3>
+                                <p id="mic-status-text">सक्रिय</p>
+                            </div>
+                            <div class="card-wave"></div>
+                        </div>
+                        
+                        <div class="status-card card-3d" id="ai-status-card">
+                            <div class="card-icon">
+                                <i class="fas fa-brain"></i>
+                                <div class="glow-effect"></div>
+                            </div>
+                            <div class="card-content">
+                                <h3>AI इंटेलिजेंस</h3>
+                                <p id="ai-status-text">सक्रिय</p>
+                            </div>
+                        </div>
+                        
+                        <div class="status-card card-3d" id="connection-status-card">
+                            <div class="card-icon">
+                                <i class="fas fa-wifi"></i>
+                                <div class="connection-bars">
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>कनेक्शन</h3>
+                                <p id="connection-status-text">ऑनलाइन</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Voice Controls -->
+                <div class="controls-section">
+                    <h2 class="section-title"><i class="fas fa-gamepad"></i> कंट्रोल्स</h2>
+                    
+                    <div class="control-buttons">
+                        <button class="control-btn btn-3d" id="startListeningBtn">
+                            <i class="fas fa-microphone"></i>
+                            <span>बोलना शुरू करें</span>
+                        </button>
+                        
+                        <button class="control-btn btn-3d" id="stopListeningBtn">
+                            <i class="fas fa-microphone-slash"></i>
+                            <span>बोलना बंद करें</span>
+                        </button>
+                        
+                        <button class="control-btn btn-3d" id="clearChatBtn">
+                            <i class="fas fa-trash"></i>
+                            <span>चैट साफ़ करें</span>
+                        </button>
+                        
+                        <button class="control-btn btn-3d" id="helpBtn">
+                            <i class="fas fa-question-circle"></i>
+                            <span>मदद</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2 class="section-title"><i class="fas fa-bolt"></i> त्वरित क्रियाएं</h2>
+                    
+                    <div class="action-grid">
+                        <button class="action-btn" data-command="समय बताओ">
+                            <i class="fas fa-clock"></i>
+                            <span>समय</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="तारीख बताओ">
+                            <i class="fas fa-calendar"></i>
+                            <span>तारीख</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="मौसम बताओ">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>मौसम</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="खबर बताओ">
+                            <i class="fas fa-newspaper"></i>
+                            <span>खबर</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="मजाक सुनाओ">
+                            <i class="fas fa-laugh"></i>
+                            <span>मजाक</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="यूट्यूब खोलो">
+                            <i class="fab fa-youtube"></i>
+                            <span>यूट्यूब</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="गूगल खोलो">
+                            <i class="fab fa-google"></i>
+                            <span>गूगल</span>
+                        </button>
+                        
+                        <button class="action-btn" data-command="स्क्रीनशॉट लो">
+                            <i class="fas fa-camera"></i>
+                            <span>स्क्रीनशॉट</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Panel - AI Assistant -->
+            <div class="center-panel">
+                <!-- AI Assistant Avatar -->
+                <div class="assistant-avatar">
+                    <div class="avatar-container">
+                        <div class="avatar-3d">
+                            <div class="face">
+                                <div class="eyes">
+                                    <div class="eye left-eye"></div>
+                                    <div class="eye right-eye"></div>
+                                </div>
+                                <div class="mouth"></div>
+                            </div>
+                            <div class="halo-ring"></div>
+                            <div class="energy-orb"></div>
+                        </div>
+                        
+                        <div class="avatar-info">
+                            <h2 class="avatar-name">जार्विस</h2>
+                            <p class="avatar-status">सक्रिय</p>
+                        </div>
+                    </div>
+
+                    <!-- Voice Activity Visualizer -->
+                    <div class="voice-visualizer">
+                        <div class="visualizer-title">
+                            <i class="fas fa-wave-square"></i>
+                            <span>वॉइस एक्टिविटी</span>
+                        </div>
+                        <div class="visualizer-bars" id="visualizerBars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation Display -->
+                <div class="conversation-container">
+                    <div class="conversation-header">
+                        <h2><i class="fas fa-comments"></i> वार्तालाप</h2>
+                        <div class="conversation-stats">
+                            <span id="messageCount">0 संदेश</span>
+                        </div>
+                    </div>
+                    
+                    <div class="messages-container" id="messagesContainer">
+                        <!-- Messages will appear here -->
+                        <div class="welcome-message">
+                            <div class="message jarvis-message">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-sender">जार्विस</div>
+                                    <div class="message-text">राधे राधे! मैं जार्विस आपकी सेवा में हूं। बोलें "Hello Raj" या "जार्विस" सुनने के लिए।</div>
+                                    <div class="message-time">अभी</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area">
+                        <div class="input-container">
+                            <input type="text" id="messageInput" placeholder="यहाँ टाइप करें या बोलें..." autocomplete="off">
+                            <button class="send-btn" id="sendMessageBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                            <button class="voice-btn" id="voiceInputBtn">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <div class="input-hint">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>प्रेस <kbd>Enter</kbd> भेजने के लिए या <kbd>Space</kbd> बोलने के लिए</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Features & Info -->
+            <div class="right-panel">
+                <!-- Features -->
+                <div class="features-section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> विशेषताएँ</h2>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>हिंदी वॉइस</h3>
+                                <p>पूर्ण हिंदी समर्थन</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>AI चैट</h3>
+                                <p>OpenRouter AI पावर्ड</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cloud-sun"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>मौसम</h3>
+                                <p>रियल-टाइम अपडेट</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>समाचार</h3>
+                                <p>ताजा हेडलाइंस</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>ईमेल</h3>
+                                <p>मेल भेजें</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h3>कोडिंग</h3>
+                                <p>प्रोग्राम लिखने में मदद</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Info -->
+                <div class="system-info-section">
+                    <h2 class="section-title"><i class="fas fa-server"></i> सिस्टम जानकारी</h2>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">संस्करण:</span>
+                            <span class="info-value">6.0</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">स्टेटस:</span>
+                            <span class="info-value status-active">सक्रिय</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">कनेक्शन:</span>
+                            <span class="info-value">WebSocket</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">भाषा:</span>
+                            <span class="info-value">हिंदी</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">अपटाइम:</span>
+                            <span class="info-value" id="uptime">00:00:00</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <span class="info-label">संदेश:</span>
+                            <span class="info-value" id="messageCountSide">0</span>
+                        </div>
+                    </div>
+                </div>
+                <audio id="notificationSound" preload="auto">
+    <source src="{{ url_for('static', filename='assets/sounds/notification.mp3') }}" type="audio/mpeg">
+</audio>
+
+                <!-- API Status -->
+                <div class="api-status-section">
+                    <h2 class="section-title"><i class="fas fa-plug"></i> API स्टेटस</h2>
+                    
+                    <div class="api-status-list">
+                        <div class="api-status-item">
+                            <div class="api-name">
+                                <i class="fas fa-comment-dots"></i>
+                                <span>OpenRouter AI</span>
+                            </div>
+                            <div class="api-status">
+                                <span class="status-dot active"></span>
+                                <span>सक्रिय</span>
+                            </div>
+                        </div>
+                        
+                        <div class="api-status-item">
+                            <div class="api-name">
+                                <i class="fas fa-cloud-sun"></i>
+                                <span>Weather API</span>
+                            </div>
+                            <div class="api-status">
+                                <span class="status-dot active"></span>
+                                <span>सक्रिय</span>
+                            </div>
+                        </div>
+                        
+                        <div class="api-status-item">
+                            <div class="api-name">
+                                <i class="fas fa-newspaper"></i>
+                                <span>News API</span>
+                            </div>
+                            <div class="api-status">
+                                <span class="status-dot active"></span>
+                                <span>सक्रिय</span>
+                            </div>
+                        </div>
+                        
+                        <div class="api-status-item">
+                            <div class="api-name">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email</span>
+                            </div>
+                            <div class="api-status">
+                                <span class="status-dot" id="emailStatusDot"></span>
+                                <span id="emailStatusText">जाँच रहा...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer-3d">
+            <div class="footer-content">
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">3D CSS</span>
+                    <span class="tech-tag">AI</span>
+                    <span class="tech-tag">हिंदी</span>
+                </div>
+                
+                <div class="footer-middle">
+                    <div class="voice-activation">
+                        <i class="fas fa-microphone"></i>
+                        <span>एक्टिवेशन वर्ड: </span>
+                        <span class="activation-words">"Hello Raj" या "जार्विस"</span>
+                    </div>
+                    
+                    <div class="copyright">
+                        © 2024 जार्विस AI असिस्टेंट | सभी अधिकार सुरक्षित
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <button class="footer-link" id="githubBtn">
+                        <i class="fab fa-github"></i> GitHub
+                    </button>
+                    <button class="footer-link" id="docsBtn">
+                        <i class="fas fa-book"></i> डॉक्यूमेंटेशन
+                    </button>
+                    <button class="footer-link" id="settingsBtn">
+                        <i class="fas fa-cog"></i> सेटिंग्स
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Audio Elements -->
+    <audio id="notificationSound" preload="auto">
+        <source src="{{ url_for('static', filename='assets/sounds/notification.mp3') }}" type="audio/mpeg">
+    </audio>
+    
+    <audio id="voiceStartSound" preload="auto">
+        <source src="{{ url_for('static', filename='assets/sounds/start.mp3') }}" type="audio/mpeg">
+    </audio>
+    
+    <audio id="voiceEndSound" preload="auto">
+        <source src="{{ url_for('static', filename='assets/sounds/end.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <!-- Socket.io and JavaScript -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
